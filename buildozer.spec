@@ -5,7 +5,7 @@ package.domain = org.colegio
 source.dir = .
 source.include_exts = py,kv,json,png,jpg
 version = 1.0
-requirements = python3,kivy
+requirements = python3==3.11.13,hostpython3==3.11.13,kivy
 orientation = portrait
 fullscreen = 0
 android.accept_sdk_license = True
