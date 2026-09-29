@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.storage.jsonstore import JsonStore
 from kivy.uix.screenmanager import Screen
+from kivy.metrics import dp
 
 store = JsonStore("estudiantes.json")
 
