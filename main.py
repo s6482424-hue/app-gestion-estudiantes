@@ -126,3 +126,4 @@ ScreenManager:
                     font_size: dp(27)
                     bold: True
                     color: 0.05, 0.55
+                    """
