@@ -14,6 +14,7 @@ ScreenManager:
 
 <MenuScreen>:
     name: "menu"
+
     BoxLayout:
         orientation: "vertical"
         padding: dp(20)
@@ -121,6 +122,19 @@ ScreenManager:
             font_size: dp(18)
             size_hint_y: None
             height: dp(60)
+
+        Button:
+            text: "📊 Estadísticas del grupo"
+            size_hint_y: None
+            height: dp(50)
+            on_release: root.show_statistics()
+
+        Label:
+            id: statistics
+            text: ""
+            font_size: dp(17)
+            size_hint_y: None
+            height: dp(150)
 
         Button:
             text: "Actualizar lista"
@@ -296,11 +310,9 @@ class StudentsScreen(Screen):
         best_name = None
         best_average = -1
 
-        # Comparamos los promedios de todos los estudiantes
         for key in store:
 
             data = store.get(key)
-
             average = data.get("average", 0)
 
             if average > best_average:
@@ -319,13 +331,59 @@ class StudentsScreen(Screen):
                 "No hay promedios registrados."
             )
 
+    def show_statistics(self):
+
+        if not store:
+            self.ids.statistics.text = (
+                "No hay estudiantes registrados."
+            )
+            return
+
+        total = 0
+        approved = 0
+        failed = 0
+        sum_averages = 0
+
+        highest = -1
+        lowest = 101
+
+        for key in store:
+
+            data = store.get(key)
+            average = float(data.get("average", 0))
+
+            total += 1
+            sum_averages += average
+
+            if average >= 60:
+                approved += 1
+            else:
+                failed += 1
+
+            if average > highest:
+                highest = average
+
+            if average < lowest:
+                lowest = average
+
+        general_average = sum_averages / total
+
+        self.ids.statistics.text = (
+            f"📊 ESTADÍSTICAS DEL GRUPO\n\n"
+            f"👥 Total de estudiantes: {total}\n"
+            f"📈 Promedio general: {general_average:.2f}\n"
+            f"✅ Aprobados: {approved}\n"
+            f"❌ Reprobados: {failed}\n"
+            f"🏆 Promedio más alto: {highest:.2f}\n"
+            f"📉 Promedio más bajo: {lowest:.2f}"
+        )
+
 
 class GradesScreen(Screen):
 
     def save_grades(self):
 
         name = self.ids.student.text.strip()
-
         key = name.lower().replace(" ", "_")
 
         if not store.exists(key):
@@ -333,7 +391,6 @@ class GradesScreen(Screen):
             self.ids.result.text = (
                 "No se encontró ese estudiante."
             )
-
             return
 
         try:
@@ -352,10 +409,8 @@ class GradesScreen(Screen):
             self.ids.result.text = (
                 "Las notas deben estar entre 0 y 100."
             )
-
             return
 
-        # Calculamos el promedio
         avg = sum(notes) / 3
 
         data = store.get(key)
