@@ -3,25 +3,11 @@ from kivy.lang import Builder
 from kivy.storage.jsonstore import JsonStore
 from kivy.uix.screenmanager import Screen
 from kivy.metrics import dp
-from kivy.uix.label import Label
-from kivy.uix.button import Button
-from kivy.uix.boxlayout import BoxLayout
-from kivy.graphics import Color, RoundedRectangle
 
 store = JsonStore("estudiantes.json")
 
-
 KV = """
 #:import dp kivy.metrics.dp
-
-<ModernButton@Button>:
-    background_normal: ""
-    background_color: 0.10, 0.35, 0.75, 1
-    color: 1, 1, 1, 1
-    font_size: dp(17)
-    bold: True
-    size_hint_y: None
-    height: dp(55)
 
 <Screen>:
     canvas.before:
@@ -31,6 +17,50 @@ KV = """
             pos: self.pos
             size: self.size
 
+<BlueButton@Button>:
+    background_normal: ""
+    background_color: 0.10, 0.40, 0.80, 1
+    color: 1, 1, 1, 1
+    font_size: dp(17)
+    bold: True
+    size_hint_y: None
+    height: dp(55)
+
+<GreenButton@Button>:
+    background_normal: ""
+    background_color: 0.10, 0.60, 0.35, 1
+    color: 1, 1, 1, 1
+    font_size: dp(17)
+    bold: True
+    size_hint_y: None
+    height: dp(55)
+
+<PurpleButton@Button>:
+    background_normal: ""
+    background_color: 0.45, 0.25, 0.75, 1
+    color: 1, 1, 1, 1
+    font_size: dp(17)
+    bold: True
+    size_hint_y: None
+    height: dp(55)
+
+<OrangeButton@Button>:
+    background_normal: ""
+    background_color: 0.90, 0.55, 0.08, 1
+    color: 1, 1, 1, 1
+    font_size: dp(17)
+    bold: True
+    size_hint_y: None
+    height: dp(55)
+
+<GrayButton@Button>:
+    background_normal: ""
+    background_color: 0.35, 0.40, 0.50, 1
+    color: 1, 1, 1, 1
+    font_size: dp(16)
+    bold: True
+    size_hint_y: None
+    height: dp(50)
 
 ScreenManager:
     MenuScreen:
@@ -44,569 +74,55 @@ ScreenManager:
 
     BoxLayout:
         orientation: "vertical"
-        padding: dp(18)
+        padding: dp(20)
         spacing: dp(12)
 
         Label:
-            text: "🎓"
-            font_size: dp(38)
-            size_hint_y: None
-            height: dp(45)
-
-        Label:
-            text: "GESTIÓN DE ESTUDIANTES"
-            font_size: dp(25)
+            text: "GESTION DE ESTUDIANTES"
+            font_size: dp(26)
             bold: True
-            color: 0.06, 0.25, 0.60, 1
+            color: 0.05, 0.25, 0.60, 1
             size_hint_y: None
-            height: dp(45)
+            height: dp(55)
 
         Label:
-            text: "Sistema de control académico"
-            font_size: dp(15)
-            color: 0.35, 0.40, 0.50, 1
+            text: "Sistema de control academico"
+            font_size: dp(16)
+            color: 0.30, 0.35, 0.45, 1
             size_hint_y: None
-            height: dp(30)
+            height: dp(35)
 
         BoxLayout:
-            spacing: dp(8)
             size_hint_y: None
             height: dp(95)
+            spacing: dp(10)
 
             BoxLayout:
                 orientation: "vertical"
-                padding: dp(5)
 
                 Label:
-                    text: "👥"
-                    font_size: dp(24)
+                    text: "ESTUDIANTES"
+                    font_size: dp(13)
+                    color: 0.15, 0.30, 0.60, 1
 
                 Label:
                     id: total
                     text: "0"
-                    font_size: dp(22)
+                    font_size: dp(27)
                     bold: True
-                    color: 0.05, 0.30, 0.70, 1
-
-                Label:
-                    text: "Estudiantes"
-                    font_size: dp(12)
+                    color: 0.05, 0.35, 0.75, 1
 
             BoxLayout:
                 orientation: "vertical"
-                padding: dp(5)
 
                 Label:
-                    text: "📈"
-                    font_size: dp(24)
+                    text: "PROMEDIO GENERAL"
+                    font_size: dp(13)
+                    color: 0.10, 0.45, 0.25, 1
 
                 Label:
                     id: promedio
                     text: "0.00"
-                    font_size: dp(22)
+                    font_size: dp(27)
                     bold: True
-                    color: 0.05, 0.50, 0.25, 1
-
-                Label:
-                    text: "Promedio general"
-                    font_size: dp(12)
-
-        ModernButton:
-            text: "👨‍🎓   REGISTRAR ESTUDIANTE"
-            background_color: 0.08, 0.38, 0.78, 1
-            on_release: root.manager.current = "register"
-
-        ModernButton:
-            text: "📋   VER ESTUDIANTES"
-            background_color: 0.42, 0.25, 0.72, 1
-            on_release: root.manager.current = "students"
-
-        ModernButton:
-            text: "📝   CALIFICACIONES"
-            background_color: 0.08, 0.58, 0.38, 1
-            on_release: root.manager.current = "grades"
-
-        ModernButton:
-            text: "📊   ESTADÍSTICAS"
-            background_color: 0.90, 0.55, 0.08, 1
-            on_release: root.manager.current = "students"
-
-
-<RegisterScreen>:
-    name: "register"
-
-    BoxLayout:
-        orientation: "vertical"
-        padding: dp(20)
-        spacing: dp(12)
-
-        Label:
-            text: "👨‍🎓"
-            font_size: dp(36)
-            size_hint_y: None
-            height: dp(45)
-
-        Label:
-            text: "REGISTRAR ESTUDIANTE"
-            font_size: dp(24)
-            bold: True
-            color: 0.06, 0.25, 0.60, 1
-            size_hint_y: None
-            height: dp(45)
-
-        TextInput:
-            id: name
-            hint_text: "Nombre completo"
-            multiline: False
-            font_size: dp(17)
-
-        TextInput:
-            id: grade
-            hint_text: "Grado / sección"
-            multiline: False
-            font_size: dp(17)
-
-        TextInput:
-            id: subject
-            hint_text: "Asignatura principal"
-            multiline: False
-            font_size: dp(17)
-
-        Label:
-            id: msg
-            text: ""
-            font_size: dp(16)
-
-        ModernButton:
-            text: "💾   GUARDAR ESTUDIANTE"
-            background_color: 0.08, 0.58, 0.38, 1
-            on_release: root.save_student()
-
-        ModernButton:
-            text: "←   VOLVER AL MENÚ"
-            background_color: 0.35, 0.40, 0.50, 1
-            on_release: root.manager.current = "menu"
-
-
-<StudentsScreen>:
-    name: "students"
-
-    BoxLayout:
-        orientation: "vertical"
-        padding: dp(12)
-        spacing: dp(8)
-
-        Label:
-            text: "📋 ESTUDIANTES"
-            font_size: dp(25)
-            bold: True
-            color: 0.06, 0.25, 0.60, 1
-            size_hint_y: None
-            height: dp(50)
-
-        ScrollView:
-            GridLayout:
-                id: list_box
-                cols: 1
-                spacing: dp(8)
-                padding: dp(4)
-                size_hint_y: None
-                height: self.minimum_height
-
-        Button:
-            text: "🏆  MEJOR PROMEDIO"
-            background_normal: ""
-            background_color: 0.95, 0.67, 0.08, 1
-            color: 1, 1, 1, 1
-            font_size: dp(16)
-            bold: True
-            size_hint_y: None
-            height: dp(48)
-            on_release: root.show_best_student()
-
-        Label:
-            id: best_student
-            text: ""
-            font_size: dp(17)
-            bold: True
-            color: 0.70, 0.45, 0.02, 1
-            size_hint_y: None
-            height: dp(45)
-
-        Button:
-            text: "📊  ESTADÍSTICAS DEL GRUPO"
-            background_normal: ""
-            background_color: 0.43, 0.26, 0.73, 1
-            color: 1, 1, 1, 1
-            font_size: dp(16)
-            bold: True
-            size_hint_y: None
-            height: dp(48)
-            on_release: root.show_statistics()
-
-        Label:
-            id: statistics
-            text: ""
-            font_size: dp(14)
-            color: 0.18, 0.22, 0.30, 1
-            size_hint_y: None
-            height: dp(120)
-
-        Button:
-            text: "←  VOLVER"
-            background_normal: ""
-            background_color: 0.35, 0.40, 0.50, 1
-            color: 1, 1, 1, 1
-            size_hint_y: None
-            height: dp(45)
-            on_release: root.manager.current = "menu"
-
-
-<GradesScreen>:
-    name: "grades"
-
-    BoxLayout:
-        orientation: "vertical"
-        padding: dp(20)
-        spacing: dp(10)
-
-        Label:
-            text: "📝"
-            font_size: dp(36)
-            size_hint_y: None
-            height: dp(45)
-
-        Label:
-            text: "CALIFICACIONES"
-            font_size: dp(24)
-            bold: True
-            color: 0.06, 0.25, 0.60, 1
-            size_hint_y: None
-            height: dp(45)
-
-        TextInput:
-            id: student
-            hint_text: "Nombre exacto del estudiante"
-            multiline: False
-            font_size: dp(17)
-
-        TextInput:
-            id: n1
-            hint_text: "Nota 1 (0-100)"
-            input_filter: "float"
-            multiline: False
-            font_size: dp(17)
-
-        TextInput:
-            id: n2
-            hint_text: "Nota 2 (0-100)"
-            input_filter: "float"
-            multiline: False
-            font_size: dp(17)
-
-        TextInput:
-            id: n3
-            hint_text: "Nota 3 (0-100)"
-            input_filter: "float"
-            multiline: False
-            font_size: dp(17)
-
-        Label:
-            id: result
-            text: ""
-            font_size: dp(18)
-            bold: True
-            size_hint_y: None
-            height: dp(65)
-
-        ModernButton:
-            text: "💾   GUARDAR Y CALCULAR"
-            background_color: 0.08, 0.58, 0.38, 1
-            on_release: root.save_grades()
-
-        ModernButton:
-            text: "←   VOLVER AL MENÚ"
-            background_color: 0.35, 0.40, 0.50, 1
-            on_release: root.manager.current = "menu"
-"""
-
-
-class MenuScreen(Screen):
-
-    def on_pre_enter(self):
-        total = len(list(store))
-        suma = 0
-
-        for key in store:
-            data = store.get(key)
-            suma += float(data.get("average", 0))
-
-        promedio = suma / total if total > 0 else 0
-
-        self.ids.total.text = str(total)
-        self.ids.promedio.text = f"{promedio:.2f}"
-
-
-class RegisterScreen(Screen):
-
-    def save_student(self):
-        name = self.ids.name.text.strip()
-        grade = self.ids.grade.text.strip()
-        subject = self.ids.subject.text.strip()
-
-        if not name or not grade:
-            self.ids.msg.text = "⚠️ Completa nombre y grado."
-            return
-
-        key = name.lower().replace(" ", "_")
-
-        if store.exists(key):
-            self.ids.msg.text = "⚠️ Ese estudiante ya existe."
-            return
-
-        store.put(
-            key,
-            name=name,
-            grade=grade,
-            subject=subject,
-            notes=[0, 0, 0],
-            average=0
-        )
-
-        self.ids.msg.text = "✅ Estudiante guardado."
-
-        self.ids.name.text = ""
-        self.ids.grade.text = ""
-        self.ids.subject.text = ""
-
-
-class StudentsScreen(Screen):
-
-    def on_pre_enter(self):
-        self.refresh()
-
-    def refresh(self):
-        box = self.ids.list_box
-        box.clear_widgets()
-
-        for key in store:
-
-            data = store.get(key)
-
-            notes = data.get("notes", [0, 0, 0])
-            average = float(data.get("average", 0))
-
-            if average >= 60:
-                estado = "🟢 APROBADO"
-                fondo = (0.86, 0.96, 0.89, 1)
-            else:
-                estado = "🔴 REPROBADO"
-                fondo = (1, 0.90, 0.90, 1)
-
-            row = BoxLayout(
-                orientation="vertical",
-                size_hint_y=None,
-                height=125,
-                padding=dp(8),
-                spacing=dp(4)
-            )
-
-            with row.canvas.before:
-                color = Color(rgba=fondo)
-                rect = RoundedRectangle(
-                    pos=row.pos,
-                    size=row.size,
-                    radius=[12]
-                )
-
-            def update_rect(instance, value, rectangle=rect):
-                rectangle.pos = instance.pos
-                rectangle.size = instance.size
-
-            row.bind(pos=update_rect)
-            row.bind(size=update_rect)
-
-            info = Label(
-                text=(
-                    f"👤 {data['name']}\n"
-                    f"🏫 {data['grade']}   "
-                    f"📚 {data.get('subject', '')}\n"
-                    f"📝 {notes[0]:.0f}  |  "
-                    f"{notes[1]:.0f}  |  "
-                    f"{notes[2]:.0f}\n"
-                    f"⭐ Promedio: {average:.2f}   {estado}"
-                ),
-                color=(0.12, 0.16, 0.24, 1),
-                font_size=dp(14)
-            )
-
-            row.add_widget(info)
-
-            delete_button = Button(
-                text="🗑 Eliminar",
-                background_normal="",
-                background_color=(0.75, 0.18, 0.18, 1),
-                color=(1, 1, 1, 1),
-                size_hint_y=None,
-                height=dp(32)
-            )
-
-            delete_button.bind(
-                on_release=lambda button, student_key=key:
-                self.delete_student(student_key)
-            )
-
-            row.add_widget(delete_button)
-
-            box.add_widget(row)
-
-    def delete_student(self, key):
-        store.delete(key)
-        self.refresh()
-
-    def show_best_student(self):
-
-        if not store:
-            self.ids.best_student.text = (
-                "No hay estudiantes registrados."
-            )
-            return
-
-        best_name = ""
-        best_average = -1
-
-        for key in store:
-
-            data = store.get(key)
-            average = float(data.get("average", 0))
-
-            if average > best_average:
-                best_average = average
-                best_name = data["name"]
-
-        self.ids.best_student.text = (
-            f"🏆 {best_name}  —  {best_average:.2f}"
-        )
-
-    def show_statistics(self):
-
-        if not store:
-            self.ids.statistics.text = (
-                "No hay estudiantes registrados."
-            )
-            return
-
-        total = 0
-        approved = 0
-        failed = 0
-        sum_averages = 0
-        highest = -1
-        lowest = 101
-
-        for key in store:
-
-            data = store.get(key)
-            average = float(data.get("average", 0))
-
-            total += 1
-            sum_averages += average
-
-            if average >= 60:
-                approved += 1
-            else:
-                failed += 1
-
-            if average > highest:
-                highest = average
-
-            if average < lowest:
-                lowest = average
-
-        general_average = sum_averages / total
-
-        self.ids.statistics.text = (
-            "📊 ESTADÍSTICAS DEL GRUPO\n"
-            f"👥 Estudiantes: {total}\n"
-            f"📈 Promedio general: {general_average:.2f}\n"
-            f"🟢 Aprobados: {approved}\n"
-            f"🔴 Reprobados: {failed}\n"
-            f"🏆 Más alto: {highest:.2f}   "
-            f"📉 Más bajo: {lowest:.2f}"
-        )
-
-
-class GradesScreen(Screen):
-
-    def save_grades(self):
-
-        name = self.ids.student.text.strip()
-        key = name.lower().replace(" ", "_")
-
-        if not store.exists(key):
-            self.ids.result.text = (
-                "❌ No se encontró ese estudiante."
-            )
-            return
-
-        try:
-
-            notes = [
-                float(self.ids.n1.text),
-                float(self.ids.n2.text),
-                float(self.ids.n3.text)
-            ]
-
-            if any(note < 0 or note > 100 for note in notes):
-                raise ValueError
-
-        except ValueError:
-
-            self.ids.result.text = (
-                "⚠️ Las notas deben estar entre 0 y 100."
-            )
-            return
-
-        average = sum(notes) / 3
-
-        data = store.get(key)
-
-        store.put(
-            key,
-            name=data["name"],
-            grade=data["grade"],
-            subject=data.get("subject", ""),
-            notes=notes,
-            average=average
-        )
-
-        if average >= 60:
-
-            self.ids.result.text = (
-                f"⭐ Promedio: {average:.2f}\n"
-                f"🟢 APROBADO"
-            )
-
-            self.ids.result.color = (
-                0.05, 0.55, 0.25, 1
-            )
-
-        else:
-
-            self.ids.result.text = (
-                f"⭐ Promedio: {average:.2f}\n"
-                f"🔴 REPROBADO"
-            )
-
-            self.ids.result.color = (
-                0.75, 0.12, 0.12, 1
-            )
-
-
-class EstudiantesApp(App):
-
-    def build(self):
-        return Builder.load_string(KV)
-
-
-if __name__ == "__main__":
-    EstudiantesApp().run()
+                    color: 0.05, 0.55
